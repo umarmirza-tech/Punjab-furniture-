@@ -2,15 +2,18 @@ import React from 'react';
 import { OrderTrackingCard } from '../components/OrderTrackingCard';
 import { SpecialCTA } from '../components/SpecialCTA';
 import { BUSINESS_CONFIG } from '../config/business';
-import { Truck, MessageCircle, Clock, MapPin } from 'lucide-react';
+import { Truck, MessageCircle, Clock, MapPin, Crown, ArrowRight } from 'lucide-react';
+import { useCart } from '../context/CartContext';
 
 export const OrderTrackingPage: React.FC = () => {
+  const { setActivePage } = useCart();
+
   return (
     <div className="bg-[#FAF9F5] min-h-screen py-12">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Breadcrumb & Header */}
-        <div className="mb-10 text-center max-w-2xl mx-auto">
+        <div className="mb-8 text-center max-w-2xl mx-auto">
           <div className="text-xs text-stone-500 mb-2">
             <span>Punjab Furnitures</span>
             <span className="mx-2">/</span>
@@ -24,6 +27,18 @@ export const OrderTrackingPage: React.FC = () => {
           <p className="text-sm text-stone-600 leading-relaxed">
             Enter your order reference number to check stage progression and receive direct WhatsApp status updates, dispatch manifests, and photos from our Saharanpur workshop.
           </p>
+
+          <div className="mt-4 inline-flex items-center gap-2 p-2 px-3 bg-[#FAF2EB] border border-[#78350F]/20 rounded-full text-xs text-[#78350F]">
+            <Crown className="w-3.5 h-3.5 text-[#78350F]" />
+            <span>Looking for past invoices & reward points?</span>
+            <button
+              onClick={() => setActivePage('account')}
+              className="font-bold underline hover:text-[#5E290B] flex items-center gap-0.5 cursor-pointer"
+            >
+              <span>View Customer Account</span>
+              <ArrowRight className="w-3 h-3" />
+            </button>
+          </div>
         </div>
 
         {/* Main Tracking Component */}

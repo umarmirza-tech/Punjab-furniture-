@@ -71,8 +71,8 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Small Trust Line */}
-          <div className="pt-6 border-t border-white/15 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-stone-300">
-            <span className="text-[#C5A880] font-medium">Quality Furniture</span>
+          <div className="pt-6 pb-2 border-t border-white/15 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-stone-300 leading-relaxed">
+            <span className="text-[#C5A880] font-medium tracking-wide">Quality Furniture</span>
             <span aria-hidden="true" className="text-stone-500">•</span>
             <span>Wide Selection</span>
             <span aria-hidden="true" className="text-stone-500">•</span>

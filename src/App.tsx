@@ -19,6 +19,7 @@ import { ContactPage } from './pages/ContactPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { WishlistPage } from './pages/WishlistPage';
 import { OrderTrackingPage } from './pages/OrderTrackingPage';
+import { AccountPage } from './pages/AccountPage';
 
 const AppContent: React.FC = () => {
   const { activePage, setActivePage } = useCart();
@@ -51,6 +52,8 @@ const AppContent: React.FC = () => {
         return <WishlistPage />;
       case 'tracking':
         return <OrderTrackingPage />;
+      case 'account':
+        return <AccountPage />;
       default:
         return <HomePage />;
     }

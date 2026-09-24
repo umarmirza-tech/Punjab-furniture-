@@ -135,10 +135,26 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <button
+                  onClick={() => handleLink('account')}
+                  className="hover:text-white transition-colors cursor-pointer text-left text-[#C5A880] flex items-center gap-1"
+                >
+                  <span>Privilege Loyalty Club</span>
+                </button>
+              </li>
+              <li>
+                <button
                   onClick={() => handleLink('tracking')}
                   className="hover:text-white transition-colors cursor-pointer text-left"
                 >
                   Track Order / Status (WhatsApp)
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => handleLink('account')}
+                  className="hover:text-white transition-colors cursor-pointer text-left"
+                >
+                  Purchase History & Account
                 </button>
               </li>
               <li>

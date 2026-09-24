@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
-import { CustomerOrderInfo } from '../types';
+import { CustomerOrderInfo, PurchaseRecord } from '../types';
 import { createCartWhatsAppOrderLink } from '../utils/whatsapp';
 import { BUSINESS_CONFIG } from '../config/business';
-import { ShieldCheck, Truck, MessageCircle, CreditCard, Banknote, CheckCircle2, ArrowLeft, AlertCircle, Package } from 'lucide-react';
+import { ShieldCheck, Truck, MessageCircle, CreditCard, Banknote, CheckCircle2, ArrowLeft, AlertCircle, Package, Crown, Tag, Check } from 'lucide-react';
 
 export const CheckoutPage: React.FC = () => {
   const {
@@ -30,6 +30,77 @@ export const CheckoutPage: React.FC = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [placedOrderId, setPlacedOrderId] = useState('');
+  const [earnedPoints, setEarnedPoints] = useState(0);
+
+  // Loyalty Voucher Discount State
+  const [couponCode, setCouponCode] = useState('');
+  const [appliedDiscount, setAppliedDiscount] = useState(0);
+  const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
+  const [couponError, setCouponError] = useState<string | null>(null);
+
+  // Auto-prefill from customer profile if available
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('punjab_furnitures_customer_profile');
+      if (stored) {
+        const profile = JSON.parse(stored);
+        setFormData(prev => ({
+          ...prev,
+          fullName: prev.fullName || profile.fullName || '',
+          phone: prev.phone || profile.phone || '',
+          email: prev.email || profile.email || '',
+          address: prev.address || profile.address || '',
+          city: profile.city || prev.city,
+          state: profile.state || prev.state,
+          pincode: profile.pincode || prev.pincode
+        }));
+      }
+
+      // Check if user has redeemed vouchers
+      const redeemedStored = localStorage.getItem('punjab_furnitures_redeemed_vouchers');
+      if (redeemedStored) {
+        const vouchers = JSON.parse(redeemedStored);
+        if (Array.isArray(vouchers) && vouchers.length > 0 && !appliedCoupon) {
+          setCouponCode(vouchers[0]);
+        }
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  const handleApplyCoupon = () => {
+    const clean = couponCode.trim().toUpperCase();
+    setCouponError(null);
+
+    if (!clean) {
+      setCouponError('Please enter a coupon code.');
+      return;
+    }
+
+    if (clean === 'PUNJAB500') {
+      if (cartSubtotal < 10000) {
+        setCouponError('PUNJAB500 requires minimum order value of ₹10,000.');
+        return;
+      }
+      setAppliedDiscount(500);
+      setAppliedCoupon('PUNJAB500');
+    } else if (clean === 'VIRASAT1200') {
+      if (cartSubtotal < 25000) {
+        setCouponError('VIRASAT1200 requires minimum order value of ₹25,000.');
+        return;
+      }
+      setAppliedDiscount(1200);
+      setAppliedCoupon('VIRASAT1200');
+    } else if (clean === 'FREESETUP' || clean === 'WOODCARE') {
+      setAppliedDiscount(300);
+      setAppliedCoupon(clean);
+    } else {
+      setCouponError('Invalid coupon code. Check active vouchers in your Account & Loyalty tab.');
+    }
+  };
+
+  const finalTotal = Math.max(0, cartTotal - appliedDiscount);
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
@@ -53,28 +124,61 @@ export const CheckoutPage: React.FC = () => {
     const orderId = `PF-${Date.now().toString().slice(-6)}`;
     setPlacedOrderId(orderId);
 
-    // Save order in recent orders list for tracking
+    // Calculate loyalty points: 1 point per 100 spent
+    const pointsCalculated = Math.round(finalTotal / 100);
+    setEarnedPoints(pointsCalculated);
+
+    const fullRecord: PurchaseRecord = {
+      orderId,
+      date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }),
+      items: cart.map(item => ({
+        productId: item.product.id,
+        productName: item.product.name,
+        quantity: item.quantity,
+        price: item.product.price,
+        image: item.product.images[0]
+      })),
+      total: finalTotal,
+      pointsEarned: pointsCalculated,
+      status: 'Confirmed',
+      customerName: formData.fullName,
+      phone: formData.phone,
+      paymentMethod: formData.paymentMethod === 'whatsapp' 
+        ? 'WhatsApp Order' 
+        : (formData.paymentMethod === 'cod' ? 'Cash on Delivery' : 'Online Gateway'),
+      deliveryAddress: `${formData.address}, ${formData.city}, ${formData.state} - ${formData.pincode}`
+    };
+
+    // Save order in recent orders list for tracking and account purchase history
     try {
-      const existing = localStorage.getItem('punjab_furnitures_recent_orders');
-      const list = existing ? JSON.parse(existing) : [];
+      const existingRecent = localStorage.getItem('punjab_furnitures_recent_orders');
+      const listRecent = existingRecent ? JSON.parse(existingRecent) : [];
       const newEntry = {
         orderId,
         date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }),
         itemsCount: cart.length,
-        total: cartTotal,
+        total: finalTotal,
         fullName: formData.fullName,
         phone: formData.phone
       };
-      localStorage.setItem('punjab_furnitures_recent_orders', JSON.stringify([newEntry, ...list.slice(0, 5)]));
+      localStorage.setItem('punjab_furnitures_recent_orders', JSON.stringify([newEntry, ...listRecent.slice(0, 5)]));
+
+      // Save to account purchase history
+      const existingAccountOrders = localStorage.getItem('punjab_furnitures_account_orders');
+      const listAccount = existingAccountOrders ? JSON.parse(existingAccountOrders) : [];
+      localStorage.setItem('punjab_furnitures_account_orders', JSON.stringify([fullRecord, ...listAccount]));
+
+      // Credit loyalty points to balance
+      const currentPoints = parseInt(localStorage.getItem('punjab_furnitures_loyalty_points') || '750', 10);
+      localStorage.setItem('punjab_furnitures_loyalty_points', (currentPoints + pointsCalculated).toString());
     } catch {
       // Ignore localStorage errors
     }
 
     // If WhatsApp Order or Pay at Store, create WhatsApp deep link
-    const whatsappLink = createCartWhatsAppOrderLink(cart, cartTotal, formData);
+    const whatsappLink = createCartWhatsAppOrderLink(cart, finalTotal, formData);
 
     if (formData.paymentMethod === 'whatsapp' || formData.paymentMethod === 'cod') {
-      // Open WhatsApp order link
       window.open(whatsappLink, '_blank');
     }
 
@@ -101,6 +205,29 @@ export const CheckoutPage: React.FC = () => {
               Order Reference: <strong className="text-stone-900">{placedOrderId}</strong>
             </p>
 
+            {/* Loyalty Points Earned Banner */}
+            <div className="p-4 bg-gradient-to-r from-[#1C1917] to-[#2E2823] rounded-lg text-white mb-6 text-left flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#C5A880]/20 flex items-center justify-center text-[#C5A880] shrink-0">
+                  <Crown className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-[#E5C158] uppercase tracking-wider">
+                    Punjab Privilege Club Rewards
+                  </div>
+                  <div className="text-sm font-semibold">
+                    +{earnedPoints} Loyalty Points Credited to Your Account!
+                  </div>
+                </div>
+              </div>
+              <button
+                onClick={() => setActivePage('account')}
+                className="px-3 py-1.5 bg-[#C5A880] hover:bg-[#B3956B] text-[#1C1917] text-xs font-bold rounded transition-colors whitespace-nowrap cursor-pointer"
+              >
+                View Account
+              </button>
+            </div>
+
             <div className="p-4 bg-[#FAF9F5] rounded-lg border border-[#E8E4DC] text-xs text-stone-700 mb-6 text-left space-y-2">
               <div className="font-semibold text-stone-900">Next Steps:</div>
               <div>1. Our showroom team on Dehradun Road will verify product availability.</div>
@@ -117,8 +244,16 @@ export const CheckoutPage: React.FC = () => {
               </button>
 
               <button
-                onClick={() => setActivePage('tracking')}
+                onClick={() => setActivePage('account')}
                 className="px-5 py-2.5 bg-[#FAF2EB] border border-[#78350F]/30 text-[#78350F] hover:bg-[#78350F] hover:text-white text-xs font-semibold rounded transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                <Crown className="w-4 h-4" />
+                <span>My Account & Points</span>
+              </button>
+
+              <button
+                onClick={() => setActivePage('tracking')}
+                className="px-5 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold rounded transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 <Package className="w-4 h-4" />
                 <span>Track this Order</span>
@@ -139,6 +274,7 @@ export const CheckoutPage: React.FC = () => {
       </div>
     );
   }
+
 
   if (cart.length === 0) {
     return (
@@ -450,6 +586,53 @@ export const CheckoutPage: React.FC = () => {
               ))}
             </div>
 
+            {/* Loyalty Voucher Coupon Box */}
+            <div className="pt-3 border-t border-[#E8E4DC]">
+              <label className="text-xs font-semibold text-stone-700 flex items-center gap-1.5 mb-1.5">
+                <Tag className="w-3.5 h-3.5 text-[#78350F]" />
+                <span>Privilege Club Coupon / Voucher</span>
+              </label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={couponCode}
+                  onChange={e => setCouponCode(e.target.value.toUpperCase())}
+                  placeholder="e.g. PUNJAB500"
+                  className="flex-1 px-3 py-2 text-xs border border-stone-300 rounded font-mono uppercase focus:outline-none focus:border-[#78350F]"
+                />
+                <button
+                  type="button"
+                  onClick={handleApplyCoupon}
+                  className="px-3 py-2 bg-stone-800 hover:bg-stone-900 text-white text-xs font-semibold rounded transition-colors cursor-pointer"
+                >
+                  Apply
+                </button>
+              </div>
+
+              {couponError && (
+                <p className="text-[11px] text-rose-500 mt-1">{couponError}</p>
+              )}
+
+              {appliedCoupon && (
+                <div className="mt-2 p-2 bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] rounded flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <Check className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Coupon <strong>{appliedCoupon}</strong> Applied (-₹{appliedDiscount})</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAppliedCoupon(null);
+                      setAppliedDiscount(0);
+                    }}
+                    className="text-stone-400 hover:text-stone-700 font-bold"
+                  >
+                    ✕
+                  </button>
+                </div>
+              )}
+            </div>
+
             {/* Totals */}
             <div className="pt-4 border-t border-[#E8E4DC] space-y-2 text-xs">
               <div className="flex justify-between text-stone-600">
@@ -458,6 +641,13 @@ export const CheckoutPage: React.FC = () => {
                   ₹{cartSubtotal.toLocaleString('en-IN')}
                 </span>
               </div>
+
+              {appliedDiscount > 0 && (
+                <div className="flex justify-between text-emerald-700 font-medium">
+                  <span>Privilege Voucher Discount</span>
+                  <span className="font-mono tabular-nums">-₹{appliedDiscount.toLocaleString('en-IN')}</span>
+                </div>
+              )}
 
               <div className="flex justify-between text-stone-600">
                 <span className="flex items-center gap-1.5">
@@ -476,8 +666,17 @@ export const CheckoutPage: React.FC = () => {
               <div className="pt-2 border-t border-[#E8E4DC] flex justify-between text-base font-bold text-stone-900">
                 <span>Total Amount</span>
                 <span className="font-mono tabular-nums">
-                  ₹{cartTotal.toLocaleString('en-IN')}
+                  ₹{finalTotal.toLocaleString('en-IN')}
                 </span>
+              </div>
+
+              {/* Loyalty points earn notice */}
+              <div className="p-2.5 bg-amber-50 rounded border border-amber-200 text-amber-900 text-[11px] flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <Crown className="w-3.5 h-3.5 text-[#78350F]" />
+                  <span>Privilege Points to Earn:</span>
+                </div>
+                <strong className="font-bold">+{Math.round(finalTotal / 100)} Points</strong>
               </div>
             </div>
 

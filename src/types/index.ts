@@ -73,4 +73,48 @@ export type ActivePage =
   | 'contact'
   | 'checkout'
   | 'wishlist'
-  | 'tracking';
+  | 'tracking'
+  | 'account';
+
+export type LoyaltyTier = 'Bronze' | 'Silver' | 'Gold' | 'Royal Teak';
+
+export interface PurchaseRecord {
+  orderId: string;
+  date: string;
+  items: {
+    productId: string;
+    productName: string;
+    quantity: number;
+    price: number;
+    image?: string;
+  }[];
+  total: number;
+  pointsEarned: number;
+  status: 'Confirmed' | 'Crafting' | 'Dispatched' | 'Delivered';
+  customerName: string;
+  phone: string;
+  paymentMethod: string;
+  deliveryAddress?: string;
+}
+
+export interface LoyaltyRewardVoucher {
+  id: string;
+  title: string;
+  description: string;
+  pointsCost: number;
+  couponCode: string;
+  discountValue: number;
+  type: 'voucher' | 'service' | 'gift';
+}
+
+export interface CustomerProfile {
+  fullName: string;
+  phone: string;
+  email: string;
+  address: string;
+  city: string;
+  state: string;
+  pincode: string;
+  memberSince: string;
+  favoriteStyle?: string;
+}
