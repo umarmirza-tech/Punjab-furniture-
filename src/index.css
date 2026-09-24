@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-bg-canvas: #FAF9F5;
+    --color-bg-surface: #FFFFFF;
+    --color-bg-subtle: #F4F1EA;
+    --color-text-main: #1C1917;
+    --color-text-muted: #6B655D;
+    --color-wood: #78350F;
+    --color-wood-dark: #552509;
+    --color-accent-gold: #C5A880;
+    --color-border: #E8E4DC;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--color-bg-canvas);
+    color: var(--color-text-main);
+  }
+
+  h1, h2, h3, .font-serif {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+}
+
+/* Custom utility styles for luxury furniture aesthetic */
+.font-display {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-sans {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar polish */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F4F1EA;
+}
+::-webkit-scrollbar-thumb {
+  background: #D4CDBC;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A89F8B;
+}
+
