@@ -120,7 +120,7 @@ const AVAILABLE_VOUCHERS: LoyaltyRewardVoucher[] = [
   {
     id: 'voucher-whiteglove',
     title: 'Free White-Glove Installation',
-    description: 'Free room placement and assembly service across Saharanpur & Dehradun Road.',
+    description: 'Free room placement and assembly service across Khatta Kheri & nearby areas.',
     pointsCost: 300,
     couponCode: 'FREESETUP',
     discountValue: 300,

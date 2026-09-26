@@ -123,7 +123,7 @@ export const ProductDetailsModal: React.FC = () => {
               <MapPin className="w-4 h-4 text-[#78350F] shrink-0 mt-0.5" />
               <div>
                 <strong className="text-stone-900 block mb-0.5">Inspect in Person at Our Showroom</strong>
-                <span>{BUSINESS_CONFIG.address.street}, Saharanpur. Open until {BUSINESS_CONFIG.timing.closesAt}.</span>
+                <span>{BUSINESS_CONFIG.address.full}. Open until {BUSINESS_CONFIG.timing.closesAt}.</span>
               </div>
             </div>
           </div>

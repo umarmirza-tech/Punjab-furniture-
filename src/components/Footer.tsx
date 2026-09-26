@@ -23,7 +23,7 @@ export const Footer: React.FC = () => {
               {BUSINESS_CONFIG.name}
             </span>
             <p className="text-xs text-stone-400 max-w-sm leading-relaxed">
-              Punjab Furnitures is a trusted furniture showroom in Saharanpur offering a wide selection of furniture for modern homes and spaces, combining regional woodworking traditions with contemporary luxury.
+              Punjab Furnitures is a trusted furniture showroom in Khatta Kheri offering a wide selection of furniture for modern homes and spaces, combining regional woodworking traditions with contemporary luxury.
             </p>
 
             <div className="pt-2 text-stone-400 space-y-2">
@@ -205,8 +205,8 @@ export const Footer: React.FC = () => {
       <div className="border-t border-[#24201D] py-6 px-4 text-center text-[11px] text-stone-500">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <span>© 2026 {BUSINESS_CONFIG.name}. All Rights Reserved.</span>
-          <span>Dehradun Road, Near Sapna Cinema, Saharanpur, UP - 247001</span>
-          <span className="text-stone-400 font-mono tabular-nums">075000 90009</span>
+          <span>{BUSINESS_CONFIG.address.full}</span>
+          <span className="text-stone-400 font-mono tabular-nums">{BUSINESS_CONFIG.phone}</span>
         </div>
       </div>
     </footer>

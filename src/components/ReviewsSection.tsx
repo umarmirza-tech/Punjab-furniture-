@@ -187,7 +187,7 @@ export const ReviewsSection: React.FC = () => {
                 Write a Customer Review
               </h3>
               <p className="text-xs text-stone-500 mb-4">
-                Did you recently visit Punjab Furnitures on Dehradun Road, Saharanpur? We appreciate your honest feedback.
+                Did you recently visit Punjab Furnitures at {BUSINESS_CONFIG.address.full}? We appreciate your honest feedback.
               </p>
 
               <form onSubmit={handleAddReview} className="space-y-4">

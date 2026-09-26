@@ -16,13 +16,13 @@ export const TrustSection: React.FC = () => {
     },
     {
       icon: Store,
-      title: "Local Saharanpur Showroom",
-      description: "Conveniently located on Dehradun Road near Sapna Cinema. Visit us in person to evaluate finishes, cushioning, and wood textures."
+      title: "Local Showroom",
+      description: `Conveniently located at ${BUSINESS_CONFIG.address.full}. Visit us in person to evaluate finishes, cushioning, and wood textures.`
     },
     {
       icon: MessageSquare,
       title: "Easy Direct Enquiry",
-      description: "No confusing automated call centers. Chat directly with showroom staff on WhatsApp (075000 90009) for instant photos and quotes."
+      description: `No confusing automated call centers. Chat directly with showroom staff on WhatsApp (${BUSINESS_CONFIG.whatsapp}) for instant photos and quotes.`
     }
   ];
 

@@ -102,8 +102,8 @@ export const HomePage: React.FC = () => {
               />
               <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-4 rounded-lg border border-[#E8E4DC] flex items-center justify-between text-xs">
                 <div>
-                  <span className="font-semibold text-stone-900 block">Dehradun Road Showroom</span>
-                  <span className="text-stone-500">Near Sapna Cinema, Khanalampura</span>
+                  <span className="font-semibold text-stone-900 block">Punjab Furnitures Showroom</span>
+                  <span className="text-stone-500">{BUSINESS_CONFIG.address.full}</span>
                 </div>
                 <span className="font-mono text-emerald-700 font-semibold bg-emerald-50 px-2.5 py-1 rounded">
                   Open till {BUSINESS_CONFIG.timing.closesAt}
@@ -122,7 +122,7 @@ export const HomePage: React.FC = () => {
               </h2>
 
               <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
-                Punjab Furnitures is a furniture showroom in Saharanpur offering a wide selection of furniture for modern homes and spaces. From deeply comfortable sofas and solid wood beds to dining sets, wardrobes, and custom orders, we provide solutions that match both your lifestyle and architecture.
+                Punjab Furnitures is a furniture showroom in {BUSINESS_CONFIG.address.full} offering a wide selection of furniture for modern homes and spaces. From deeply comfortable sofas and solid wood beds to dining sets, wardrobes, and custom orders, we provide solutions that match both your lifestyle and architecture.
               </p>
 
               <div className="space-y-3 pt-2">
@@ -146,7 +146,7 @@ export const HomePage: React.FC = () => {
                   <CheckCircle2 className="w-5 h-5 text-[#78350F] shrink-0 mt-0.5" />
                   <div>
                     <h4 className="text-sm font-semibold text-stone-900">Attentive Local Service</h4>
-                    <p className="text-xs text-stone-600">Prompt consultation, personal walkthroughs, and direct WhatsApp customer support on 075000 90009.</p>
+                    <p className="text-xs text-stone-600">Prompt consultation, personal walkthroughs, and direct WhatsApp customer support on {BUSINESS_CONFIG.whatsapp}.</p>
                   </div>
                 </div>
               </div>

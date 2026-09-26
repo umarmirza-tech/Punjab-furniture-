@@ -191,7 +191,7 @@ export const OrderTrackingCard: React.FC<OrderTrackingCardProps> = ({ initialOrd
               className="px-5 py-2.5 bg-[#25D366] hover:bg-[#20BE5A] text-white text-xs font-semibold rounded-md transition-colors flex items-center gap-2 shadow-sm"
             >
               <MessageCircle className="w-4 h-4" />
-              <span>Get Status Update via WhatsApp (075000 90009)</span>
+              <span>Get Status Update via WhatsApp ({BUSINESS_CONFIG.whatsapp})</span>
             </a>
           )}
         </div>
@@ -306,7 +306,7 @@ export const OrderTrackingCard: React.FC<OrderTrackingCardProps> = ({ initialOrd
           <div className="flex items-start gap-2 text-[11px] text-stone-500">
             <ShieldCheck className="w-3.5 h-3.5 text-[#78350F] shrink-0 mt-0.5" />
             <span>
-              Orders are fulfilled directly by Punjab Furnitures, Dehradun Road, Near Sapna Cinema, Khanalampura, Saharanpur, UP - 247001. Timing: Open daily until {BUSINESS_CONFIG.timing.closesAt}.
+              Orders are fulfilled directly by Punjab Furnitures, {BUSINESS_CONFIG.address.full}. Timing: Open daily until {BUSINESS_CONFIG.timing.closesAt}.
             </span>
           </div>
 

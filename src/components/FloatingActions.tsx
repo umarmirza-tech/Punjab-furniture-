@@ -64,7 +64,7 @@ export const FloatingActions: React.FC = () => {
           href={`https://wa.me/${BUSINESS_CONFIG.whatsappRaw}?text=${encodeURIComponent('Hello Punjab Furnitures, I am browsing your furniture website and would like some assistance.')}`}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Chat with Punjab Furnitures on WhatsApp (075000 90009)"
+          aria-label={`Chat with Punjab Furnitures on WhatsApp (${BUSINESS_CONFIG.whatsapp})`}
           className="pointer-events-auto p-3.5 bg-[#25D366] hover:bg-[#20BE5A] text-white rounded-full shadow-2xl transition-all duration-200 transform hover:scale-105 flex items-center justify-center"
         >
           <MessageCircle className="w-6 h-6" />

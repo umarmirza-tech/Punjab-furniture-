@@ -49,7 +49,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAdmin }) => {
             </span>
             <span className="hidden md:flex items-center gap-1.5 text-stone-400">
               <MapPin className="w-3.5 h-3.5" />
-              <span>{BUSINESS_CONFIG.address.street}, Saharanpur</span>
+              <span>{BUSINESS_CONFIG.address.full}</span>
             </span>
           </div>
 
@@ -110,7 +110,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAdmin }) => {
                 Punjab Furnitures
               </span>
               <span className="block text-[9px] sm:text-[10.5px] tracking-[0.16em] sm:tracking-[0.22em] uppercase text-[#78350F] font-semibold mt-0.5 leading-normal pb-0.5">
-                Saharanpur • Est. Quality
+                Khatta Kheri • Est. Quality
               </span>
             </button>
           </div>
@@ -191,7 +191,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAdmin }) => {
 
             {/* Direct WhatsApp Callout Button */}
             <a
-              href={`https://wa.me/${BUSINESS_CONFIG.whatsappRaw}?text=${encodeURIComponent('Hello Punjab Furnitures, I would like to enquire about furniture available at your Saharanpur showroom.')}`}
+              href={`https://wa.me/${BUSINESS_CONFIG.whatsappRaw}?text=${encodeURIComponent('Hello Punjab Furnitures, I would like to enquire about furniture available at your Khatta Kheri showroom.')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:inline-flex items-center gap-1.5 bg-[#25D366] hover:bg-[#20BE5A] text-white px-3 py-1.5 lg:px-3.5 lg:py-2 rounded-md text-xs font-semibold shadow-sm transition-all whitespace-nowrap"
@@ -250,7 +250,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAdmin }) => {
                   className="flex items-center justify-center gap-2 bg-[#25D366] text-white py-2.5 rounded-md font-semibold text-xs"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  <span>Chat on WhatsApp (075000 90009)</span>
+                  <span>Chat on WhatsApp ({BUSINESS_CONFIG.whatsapp})</span>
                 </a>
 
                 <a
@@ -258,7 +258,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAdmin }) => {
                   className="flex items-center justify-center gap-2 bg-[#F4F1EA] text-stone-800 border border-[#E0DCD3] py-2.5 rounded-md font-medium text-xs"
                 >
                   <Phone className="w-4 h-4 text-[#78350F]" />
-                  <span>Call Showroom (075000 90009)</span>
+                  <span>Call Showroom ({BUSINESS_CONFIG.phone})</span>
                 </a>
               </div>
             </div>

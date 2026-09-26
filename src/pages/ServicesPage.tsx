@@ -138,7 +138,7 @@ export const ServicesPage: React.FC = () => {
 
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
               <span className="text-[11px] text-stone-500">
-                Directly forwards to our showroom manager on WhatsApp (075000 90009).
+                Directly forwards to our showroom manager on WhatsApp ({BUSINESS_CONFIG.whatsapp}).
               </span>
 
               <button

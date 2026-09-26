@@ -22,7 +22,7 @@ export const AboutPage: React.FC = () => {
             About Punjab Furnitures
           </h1>
           <p className="text-lg text-stone-700 leading-relaxed font-light">
-            Punjab Furnitures is a furniture showroom in Saharanpur offering a wide selection of furniture for modern homes and spaces.
+            Punjab Furnitures is a furniture showroom in Khatta Kheri offering a wide selection of furniture for modern homes and spaces.
           </p>
         </div>
 
@@ -31,14 +31,14 @@ export const AboutPage: React.FC = () => {
           <div className="relative rounded-xl overflow-hidden border border-[#E8E4DC] shadow-lg">
             <img
               src={showroomImg}
-              alt="Punjab Furnitures Showroom Saharanpur"
+              alt="Punjab Furnitures Showroom Khatta Kheri"
               referrerPolicy="no-referrer"
               className="w-full aspect-[4/3] object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-6">
               <div className="text-white text-xs">
-                <span className="font-semibold block text-sm">Dehradun Road Showroom</span>
-                <span>Near Sapna Cinema, Khanalampura, Saharanpur</span>
+                <span className="font-semibold block text-sm">Punjab Furnitures Showroom</span>
+                <span>{BUSINESS_CONFIG.address.full}</span>
               </div>
             </div>
           </div>
@@ -53,7 +53,7 @@ export const AboutPage: React.FC = () => {
             </h2>
 
             <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
-              Located on Dehradun Road near Sapna Cinema in Saharanpur, Punjab Furnitures serves homeowners, interior designers, and businesses seeking furniture that balances timeless aesthetic appeal with durable utility.
+              Located at {BUSINESS_CONFIG.address.full}, Punjab Furnitures serves homeowners, interior designers, and businesses seeking furniture that balances timeless aesthetic appeal with durable utility.
             </p>
 
             <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
@@ -121,7 +121,7 @@ export const AboutPage: React.FC = () => {
               <span className="text-2xl font-display font-bold text-[#78350F] block mb-2 font-mono">04.</span>
               <h4 className="text-base font-bold text-stone-900 mb-2">Showroom Accessibility</h4>
               <p className="text-xs text-stone-600 leading-relaxed">
-                Open 7 days a week until 9:00 PM on Dehradun Road, making evening family visits and weekend selections effortless.
+                Open 7 days a week until 9:00 PM at {BUSINESS_CONFIG.address.full}, making evening family visits and weekend selections effortless.
               </p>
             </div>
           </div>
@@ -157,10 +157,10 @@ export const AboutPage: React.FC = () => {
         {/* Action Box */}
         <div className="bg-[#1C1917] text-white rounded-xl p-8 sm:p-12 text-center max-w-3xl mx-auto">
           <h3 className="text-2xl sm:text-3xl font-display font-bold mb-3">
-            Visit Our Saharanpur Showroom
+            Visit Our Showroom
           </h3>
           <p className="text-xs sm:text-sm text-stone-300 mb-8 max-w-lg mx-auto">
-            Experience the craftsmanship in person. Open daily until 9 PM at Dehradun Road, Near Sapna Cinema, Khanalampura.
+            Experience the craftsmanship in person. Open daily until 9 PM at {BUSINESS_CONFIG.address.full}.
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">

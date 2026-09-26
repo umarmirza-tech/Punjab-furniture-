@@ -230,7 +230,7 @@ export const CheckoutPage: React.FC = () => {
 
             <div className="p-4 bg-[#FAF9F5] rounded-lg border border-[#E8E4DC] text-xs text-stone-700 mb-6 text-left space-y-2">
               <div className="font-semibold text-stone-900">Next Steps:</div>
-              <div>1. Our showroom team on Dehradun Road will verify product availability.</div>
+              <div>1. Our showroom team at {BUSINESS_CONFIG.address.full} will verify product availability.</div>
               <div>2. You will receive a direct call / WhatsApp confirmation on <strong>{formData.phone}</strong>.</div>
               <div>3. Delivery & assembly schedule will be coordinated to your address.</div>
             </div>
@@ -480,7 +480,7 @@ export const CheckoutPage: React.FC = () => {
                     </span>
                   </div>
                   <p className="text-[11px] text-stone-500 mt-1">
-                    Generates an official formatted WhatsApp order sent straight to 075000 90009. Our showroom team immediately locks stock and discusses payment options.
+                    Generates an official formatted WhatsApp order sent straight to {BUSINESS_CONFIG.whatsapp}. Our showroom team immediately locks stock and discusses payment options.
                   </p>
                 </div>
               </label>
@@ -508,7 +508,7 @@ export const CheckoutPage: React.FC = () => {
                     </span>
                   </div>
                   <p className="text-[11px] text-stone-500 mt-1">
-                    Inspect the furniture at our Dehradun Road showroom or pay when local delivery arrives in Saharanpur.
+                    Inspect the furniture at our {BUSINESS_CONFIG.address.full} showroom or pay when local delivery arrives.
                   </p>
                 </div>
               </label>
@@ -694,7 +694,7 @@ export const CheckoutPage: React.FC = () => {
             </button>
 
             <div className="text-[11px] text-stone-500 text-center">
-              Direct assistance available anytime at <strong className="text-stone-800">075000 90009</strong>.
+              Direct assistance available anytime at <strong className="text-stone-800">{BUSINESS_CONFIG.phone}</strong>.
             </div>
           </div>
 

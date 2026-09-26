@@ -47,7 +47,7 @@ export const ContactPage: React.FC = () => {
             Contact & Support
           </h1>
           <p className="text-sm sm:text-base text-stone-600 leading-relaxed mb-8">
-            We are conveniently situated on Dehradun Road, Saharanpur. Drop by our showroom to experience the quality firsthand or connect via phone and WhatsApp.
+            We are conveniently situated at {BUSINESS_CONFIG.address.full}. Drop by our showroom to experience the quality firsthand or connect via phone and WhatsApp.
           </p>
 
           {/* Clean Segmented Tab Switcher */}
@@ -104,9 +104,7 @@ export const ContactPage: React.FC = () => {
                 <p className="text-sm text-stone-700 leading-relaxed flex items-start gap-2.5">
                   <MapPin className="w-5 h-5 text-[#78350F] shrink-0 mt-0.5" />
                   <span>
-                    {BUSINESS_CONFIG.address.street},<br />
-                    {BUSINESS_CONFIG.address.locality},<br />
-                    {BUSINESS_CONFIG.address.city}, {BUSINESS_CONFIG.address.state} - {BUSINESS_CONFIG.address.pincode}
+                    {BUSINESS_CONFIG.address.full}
                   </span>
                 </p>
               </div>
@@ -299,7 +297,7 @@ export const ContactPage: React.FC = () => {
                   Find Punjab Furnitures on Google Maps
                 </h3>
                 <span className="text-xs text-stone-500">
-                  Dehradun Road, Near Sapna Cinema, Khanalampura, Saharanpur
+                  {BUSINESS_CONFIG.address.full}
                 </span>
               </div>
             </div>
@@ -319,7 +317,7 @@ export const ContactPage: React.FC = () => {
           <div className="w-full h-80 sm:h-96 relative bg-[#EFECE4]">
             <iframe
               title="Punjab Furnitures Location"
-              src={`https://maps.google.com/maps?q=${encodeURIComponent('Punjab Furnitures Dehradun Road Near Sapna Cinema Khanalampura Saharanpur Uttar Pradesh')}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+              src={`https://maps.google.com/maps?q=${encodeURIComponent('Khatta Kheri')}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
               width="100%"
               height="100%"
               style={{ border: 0 }}

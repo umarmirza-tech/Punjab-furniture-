@@ -52,7 +52,7 @@ export const OrderTrackingPage: React.FC = () => {
             </div>
             <h3 className="text-sm font-bold text-stone-900 mb-1">WhatsApp Live Tracking</h3>
             <p className="text-xs text-stone-600 leading-relaxed">
-              Message <strong className="text-stone-900 font-mono">075000 90009</strong> with your order number for real-time warehouse pictures and dispatch details.
+              Message <strong className="text-stone-900 font-mono">{BUSINESS_CONFIG.whatsapp}</strong> with your order number for real-time warehouse pictures and dispatch details.
             </p>
           </div>
 
@@ -72,7 +72,7 @@ export const OrderTrackingPage: React.FC = () => {
             </div>
             <h3 className="text-sm font-bold text-stone-900 mb-1">Showroom Hours</h3>
             <p className="text-xs text-stone-600 leading-relaxed">
-              Open 7 days a week until <strong className="text-stone-900">{BUSINESS_CONFIG.timing.closesAt}</strong> at Dehradun Road, Near Sapna Cinema, Saharanpur.
+              Open 7 days a week until <strong className="text-stone-900">{BUSINESS_CONFIG.timing.closesAt}</strong> at {BUSINESS_CONFIG.address.full}.
             </p>
           </div>
         </div>

@@ -6,22 +6,22 @@
 export const BUSINESS_CONFIG = {
   name: "Punjab Furnitures",
   tagline: "Timeless Quality & Contemporary Comfort",
-  phone: "075000 90009",
-  phoneFormatted: "+91 75000 90009",
-  phoneRaw: "917500090009",
-  whatsapp: "075000 90009",
-  whatsappRaw: "917500090009",
+  phone: "8449233101",
+  phoneFormatted: "+91 8449233101",
+  phoneRaw: "918449233101",
+  whatsapp: "8449233101",
+  whatsappRaw: "918449233101",
   email: "punjabfurnituressre@gmail.com",
   
   address: {
-    street: "Dehradun Road, Near Sapna Cinema",
-    locality: "Khanalampura",
-    city: "Saharanpur",
-    state: "Uttar Pradesh",
-    pincode: "247001",
+    street: "Khatta Kheri",
+    locality: "Khatta Kheri",
+    city: "Khatta Kheri",
+    state: "",
+    pincode: "",
     country: "India",
-    full: "Dehradun Road, Near Sapna Cinema, Khanalampura, Saharanpur, Uttar Pradesh - 247001, India",
-    directionsUrl: "https://www.google.com/maps/search/?api=1&query=Punjab+Furnitures+Dehradun+Road+Near+Sapna+Cinema+Saharanpur"
+    full: "Khatta Kheri",
+    directionsUrl: "https://www.google.com/maps/search/?api=1&query=Khatta+Kheri"
   },
 
   timing: {
@@ -55,8 +55,8 @@ export const BUSINESS_CONFIG = {
       description: "Rigid hardwood, seasoned teak & sheesham finishes engineered for durability."
     },
     {
-      title: "Local Saharanpur Showroom",
-      description: "Touch, feel, and inspect furniture in person at our Dehradun Road showroom."
+      title: "Local Showroom",
+      description: "Touch, feel, and inspect furniture in person at our Khatta Kheri showroom."
     },
     {
       title: "Custom Furniture Enquiries",

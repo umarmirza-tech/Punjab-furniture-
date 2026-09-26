@@ -43,7 +43,7 @@ export const SpecialCTA: React.FC = () => {
             className="px-6 py-3.5 bg-[#25D366] hover:bg-[#20BE5A] text-white font-semibold text-xs sm:text-sm rounded-md transition-all shadow-md flex items-center gap-2"
           >
             <MessageCircle className="w-4 h-4" />
-            <span>WhatsApp Us (075000 90009)</span>
+            <span>WhatsApp Us ({BUSINESS_CONFIG.whatsapp})</span>
           </a>
 
           {/* Call Now */}
@@ -60,7 +60,7 @@ export const SpecialCTA: React.FC = () => {
         <div className="mt-8 text-xs text-stone-400">
           <span>Showroom timing: Open 7 days a week until {BUSINESS_CONFIG.timing.closesAt}</span>
           <span className="mx-2">·</span>
-          <span>{BUSINESS_CONFIG.address.street}, Saharanpur</span>
+          <span>{BUSINESS_CONFIG.address.full}</span>
         </div>
       </div>
     </section>

@@ -45,7 +45,7 @@ export const ServicesSection: React.FC = () => {
     {
       title: "Showroom Assistance",
       subtitle: "Personal Walkthrough",
-      description: "Visit our Dehradun Road showroom to personally feel fabric textures, test mattress firming, and inspect solid wood joinery with guidance from our team.",
+      description: `Visit our ${BUSINESS_CONFIG.address.full} showroom to personally feel fabric textures, test mattress firming, and inspect solid wood joinery with guidance from our team.`,
       icon: Store,
       actionText: "Showroom Location",
       onClick: () => setActivePage('contact')
@@ -53,9 +53,9 @@ export const ServicesSection: React.FC = () => {
     {
       title: "Product Enquiry via WhatsApp",
       subtitle: "Instant Photo & Video Sharing",
-      description: "Can't visit today? Chat directly on 075000 90009 to receive high-definition photos, dimension sheets, and real-time product updates on your phone.",
+      description: `Can't visit today? Chat directly on ${BUSINESS_CONFIG.whatsapp} to receive high-definition photos, dimension sheets, and real-time product updates on your phone.`,
       icon: MessageCircle,
-      actionText: "Chat on 075000 90009",
+      actionText: `Chat on ${BUSINESS_CONFIG.whatsapp}`,
       whatsapp: true
     }
   ];
